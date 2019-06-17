@@ -21,25 +21,9 @@
     text-transform:uppercase;
 }
 
-[tooltip]::before{
-    content:'';
-    position:absolute;
-    background-color:#aecfec;
-    padding:0.5em;
 
-    opacity:0;
-    transition:1.01s cubic-bezier(0, 2.42, 0, 1.9);
-    max-width:400px;
-    height:1px;
-    width:1px;
-    transform:rotate(45deg);
-    right:95px;
-}
 
 
 [tooltip]:hover::before{
-    opacity:1;
-}
-[tooltip]:hover::after{
     opacity:1;
 }
