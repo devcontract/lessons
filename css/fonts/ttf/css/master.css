@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'ttf';
+    src: url('../fonts/Sixty.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+span{
+    font-family: ttf;
+    font-size: 200px;
+}

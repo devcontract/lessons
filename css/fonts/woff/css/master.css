@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'introrustg-base2line';
+    src: url('../fonts/introrustg-base2line-webfont.woff2') format('woff2'),
+    url('../fonts/introrustg-base2line-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+span{
+    font-family: introrustg-base2line;
+    font-size: 200px;
+}
