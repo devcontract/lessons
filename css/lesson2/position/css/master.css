@@ -3,7 +3,7 @@
     width:600px;
     height:400px;
     background-color:orange;
-    disply:flex;
+    display:flex;
     justify-content:space-around;
 
 }
