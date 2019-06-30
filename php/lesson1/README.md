@@ -64,7 +64,7 @@ ssl-key=/Applications/MAMP/htdocs/project/ssl/server-key.pem
 require_secure_transport=ON
 
 
-## .Теперь сохраните этот фаил и перезагрузите MAMP сервер.
+## Теперь сохраните этот фаил и перезагрузите MAMP сервер.
 
  
 
