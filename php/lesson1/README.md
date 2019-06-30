@@ -67,5 +67,5 @@ require_secure_transport=ON
 ## Теперь сохраните этот фаил и перезагрузите MAMP сервер.
 
  
-
+// https://github.com/devcontract/lessons.git //
 
