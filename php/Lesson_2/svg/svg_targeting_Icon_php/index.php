@@ -10,9 +10,9 @@ require './php/main.php';
     <title>Title</title>
 </head>
 <body>
-<?php getIcon("facebook"); ?>
+<?php echo $icon = getIcon("facebook"); ?>
 <br>
-<?php getIcon("instagram"); ?>
+<?php echo $icon = getIcon("instagram"); ?>
 <div>
 </div>
 </body>
