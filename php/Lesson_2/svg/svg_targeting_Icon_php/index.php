@@ -8,7 +8,7 @@ function getIcon($icon){
         "instagram"=> array('x'=> '84.5',"y"=>'257','scaleX'=>'50','scaleY'=>'50'),
 
     );
-    echo '<svg id="svg" viewBox="'. $icons[$icon]['x'] .' 257 50 50" width="100" height="100"><image xlink:href="pattern.svg"/></svg>';
+    echo '<img id="img" viewBox="'. $icons[$icon]['x'] .' 257 50 50" width="100" height="100"><image xlink:href="./img/pattern.img"/></img>';
 }
 
 ?>
