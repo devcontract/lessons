@@ -11,7 +11,7 @@ require './php/main.php';
 </head>
 <body>
 <?php getIcon("facebook"); ?>
-<?php echo '<br>'; ?>
+<br>
 <?php getIcon("instagram"); ?>
 <div>
 </div>
