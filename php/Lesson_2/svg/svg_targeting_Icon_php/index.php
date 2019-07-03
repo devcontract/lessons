@@ -1,16 +1,6 @@
-
 <?php
 
-
-function getIcon($icon){
-    $icons = array(
-        "facebook"=> array('x'=> '30',"y"=>'257','scaleX'=>'50','scaleY'=>'50'),
-        "instagram"=> array('x'=> '84.5',"y"=>'257','scaleX'=>'50','scaleY'=>'50'),
-
-    );
-    echo '<img id="img" viewBox="'. $icons[$icon]['x'] .' 257 50 50" width="100" height="100"><image xlink:href="./img/pattern.img"/></img>';
-}
-
+include './php/main.php';
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +11,7 @@ function getIcon($icon){
 </head>
 <body>
 <?php getIcon("facebook"); ?>
-<?php echo '<br>' ?>
+<?php echo '<br>'; ?>
 <?php getIcon("instagram"); ?>
 <div>
 </div>
