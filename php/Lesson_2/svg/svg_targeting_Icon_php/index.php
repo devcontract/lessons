@@ -8,6 +8,7 @@ require './php/main.php';
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="css/master.css">
 </head>
 <body>
 <?php echo $icon = getIcon("facebook"); ?>
