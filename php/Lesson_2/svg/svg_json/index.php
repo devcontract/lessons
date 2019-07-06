@@ -8,7 +8,7 @@ require './php/main.php'
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/css/">
+    <link rel="stylesheet" href="/css">
 </head>
 <body>
 
