@@ -1,0 +1,11 @@
+.opened::after{
+    content:"\02C4";
+    color:#bf15aa;
+    font-weight:bold;
+    font-size:50px !important;
+}
+.closed::before{
+    content:"\02C5";
+    color:#bf15aa;
+    font-size:39px !important;
+}
