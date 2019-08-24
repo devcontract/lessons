@@ -1,0 +1,20 @@
+
+
+.opened{
+
+
+    background: url(../img/down.png) no-repeat;
+    width: fit-content; /* Width of new image */
+    height: 100px; /* Height of new image */
+    padding-left: 100px; /* Equal to width of new image */
+
+}
+.closed{
+
+
+    background: url(../img/up.png) no-repeat;
+    width: fit-content; /* Width of new image */
+    height: 100px; /* Height of new image */
+    padding-left: 100px; /* Equal to width of new image */
+
+}
