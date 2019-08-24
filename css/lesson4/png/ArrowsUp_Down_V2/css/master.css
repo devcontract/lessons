@@ -1,0 +1,21 @@
+
+
+.opened{
+
+    background: url(../img/up.png) no-repeat;
+    width: fit-content; /* Width of new image */
+    height: 100px; /* Height of new image */
+    padding-left: 100px; /* Equal to width of new image */
+    transform:rotate(180deg);
+    transition:2s;
+}
+.closed{
+
+
+
+    background: url(../img/up.png) no-repeat;
+    width: fit-content; /* Width of new image */
+    height: 100px; /* Height of new image */
+    padding-left: 100px; /* Equal to width of new image */
+    transition:2s;
+}
