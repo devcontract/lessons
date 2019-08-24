@@ -1,6 +1,8 @@
 #a::after{
-    content:"\02C4";
+    content:"\02C5";
     width:10px;
+
+
 }
 
 .opened{
@@ -8,15 +10,16 @@
     width:10px;
     color:#bf15aa;
     font-weight:400;
-    font-size:39px !important;
+    font-size:89px !important;
     transition:2s ease-in-out;
+
 }
 .closed{
     width:10px;
     transform: rotate3d(1, 0, 0, 180deg);
     color:#bf15aa;
     font-weight:400;
-    font-size:39px !important;
+    font-size:89px !important;
     transition:2s ease-in-out;
 
 }
