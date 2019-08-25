@@ -10,9 +10,9 @@
     width:10px;
     color:#bf15aa;
     font-weight:400;
-    font-size:89px !important;
-    transition:2s ease-in-out;
-    line-height: 161.8%;
+    font-size:39px !important;
+    transition:1s ease-in-out;
+    line-height: calc(1.618 * 100%);
 
 }
 .closed{
@@ -20,8 +20,8 @@
     transform: rotate3d(1, 0, 0, 180deg);
     color:#bf15aa;
     font-weight:400;
-    font-size:89px !important;
-    transition:2s ease-in-out;
+    font-size:39px !important;
+    transition:1s ease-in-out;
 
 }
 
