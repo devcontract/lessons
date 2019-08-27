@@ -1,0 +1,14 @@
+.jumbotron{
+    background-color:#00abff;
+    background-size: cover;
+    background-attachment: fixed;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0;
+
+}
+
+table{
+    margin-top:35%;
+}
