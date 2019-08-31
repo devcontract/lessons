@@ -1,0 +1,25 @@
+.mytext{
+    position: absolute;
+    width:200px;
+    height: 200px;
+    top:50%;
+    left: 12%;
+    transform: translateX(-50%);
+    text-align: center;
+
+    color: transparent;
+    z-index: 1;
+
+}
+#test{
+    position: relative;
+
+
+}
+
+canvas{
+    background-image: url(img/elephant.png);
+    background-size: 250px;
+    background-repeat: no-repeat;
+    background-position:center;
+}

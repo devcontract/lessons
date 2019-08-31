@@ -1,0 +1,18 @@
+.mytext{
+    position: absolute;
+    top:20%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background-image: url(img/elephant.png);
+    background-size:contain;
+    background-repeat: no-repeat;
+    color: transparent;
+    z-index: 1;
+
+}
+#test{
+    position: relative;
+
+
+}
