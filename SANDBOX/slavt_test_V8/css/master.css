@@ -3,32 +3,33 @@ body {
 }
 
 #test{
-height: 500px;
-width: 800px;
-background-color: #193c6d;
-text-align: center;
-margin: 0px auto;
-overflow:overlay;
+
+    background-color: #193c6d;
+    text-align: center;
+    margin: 0px auto;
+    overflow:overlay;
 }
 
 
 
 canvas{
-margin-top:-300px !important;
+    margin-top:-300px !important;
+    width:100% !important;
+    height:100% !important;
 }
 #test{
-border:5px solid red;
-margin-left:100px !important;
+    border:5px solid red;
+    margin-left:100px !important;
 }
 .mytext{
-border:5px solid orange;
+    border:5px solid orange;
 
 }
 
 .control{
-border:1px solid white;
-width:fit-content;
-margin:10px auto;
-color:white;
-padding:10px;
+    border:1px solid white;
+    width:fit-content;
+    margin:10px auto;
+    color:white;
+    padding:10px;
 }
