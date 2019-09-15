@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/master.css">
+    <script src="js/jquery341.js"></script>
+
+    <title></title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class=" col form-group">
+            <label for="userSearchInput">Enter User name to search</label>
+            <input type="text" class="form-control" id="userSearchInput" aria-describedby="usersSearch"
+                   placeholder="Enter user name" required>
+            <small id="userHelp" class="form-text text-muted">Number of users : <span id="userCount"></span></small>
+            <button id="usersSearchBtn" class="btn btn-sm btn-primary">Search</button>
+            <button id="usersSearchStopBtn" class="btn btn-sm btn-primary">Stop</button>
+            <div id="loading" class=""></div>
+
+        </div>
+
+
+        <div class=" col form-group">
+            <label for="userFollowInput">Enter User name to follow</label>
+            <input type="text" class="form-control" id="userFollowInput" aria-describedby="userFollowInput"
+                   placeholder="Enter user name" required disabled>
+            <small id="dbHelp" class="form-text text-muted">Number of users : <span id="followingUserCount"></span>
+            </small>
+           <!-- <button id="singleFollowBtn" class="btn btn-sm btn-primary">Follow Single</button> -->
+            <button id="userFollowBtn" class="btn btn-sm btn-primary">Follow All</button>
+            <button id="allUserFollowStopBtn" class="btn btn-sm btn-primary">Stop</button>
+
+        </div>
+
+        <div class="w-100"></div>
+
+        <div class=" col form-group">
+            <label for="userShare">Sharing Users Items</label>
+            <input type="text" class="form-control" id="userShareInput" aria-describedby="userFollowInput"
+                   placeholder="Enter user name" required>
+            <small id="sharedHelp" class="form-text text-muted">Number of users : <span id="userShare"></span></small>
+            <button id="userShareBtn" class="btn btn-sm btn-primary">Share All</button>
+            <button id="allUserShareStopBtn" class="btn btn-sm btn-primary">Stop</button>
+
+        </div>
+
+        <div class=" col form-group">
+           UNDER CONSTRUCIOTN
+
+        </div>
+    </div>
+
+
+</div>
+<script src="js/popup.js"></script>
+</body>
+</html>
