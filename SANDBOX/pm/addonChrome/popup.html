@@ -16,47 +16,146 @@
 <body>
 
 <div class="container">
+
+
+    <div>
+        <ul id="menu" class="navbar navbar-expand-lg navbar-light bg-light">
+            <a href="#tab1"><li>Search</li></a>
+            <a href="#tab2"><li>Follow</li></a>
+            <a href="#tab3"><li>Share</li></a>
+            <a href="#tab4"><li>Like</li></a>
+        </ul>
+    </div>
+
+
+    <div class="tab-folder">
+        <div id="tab1" class="tab-content">
+            <div class=" col form-group">
+                <label for="userSearchInput">Enter User name to search</label>
+                <input type="text" class="form-control" id="userSearchInput" aria-describedby="usersSearch"
+                       placeholder="Enter user name" required>
+
+            <div class="small">
+                <small id="userHelp" class="form-text text-muted">Number of users : <span id="userCount"></span></small>
+                <small id="lastUserHelp" class="form-text text-muted">Last recorded user : <span id="lastUser"></span>
+                </small>
+                <small id="lastSearchHelp" class="form-text text-muted">Last searched word : <span
+                        id="lastSearch"></span>
+                </small>
+
+            </div>
+<div class="panelBtn">
+
+    <button id="usersSearchContinueBtn" class=" btn btn-sm btn-primary">Continue</button>
+    <button id="usersSearchBtn" class=" btn btn-sm btn-primary">Search</button>
+    <button id="usersSearchStopBtn" class=" btn btn-sm btn-primary">Stop</button>
+
+</div>                <div id="loading" class=""></div>
+
+            </div>
+
+        </div>
+        <div id="tab2" class="tab-content">
+            <div class=" col form-group">
+                <label for="userFollowInput">Enter User Id to follow</label>
+                <input type="text" class="form-control" id="userFollowInput" aria-describedby="userFollowInput"
+                       placeholder="Enter user Id or click here" required>
+
+              <div class="small">
+
+                  <small id="dbHelp" class="form-text text-muted">Number of users : <span id="followingUserCount"></span>
+                  </small>
+
+
+                  <small id="lastUserFollowHelp" class="form-text text-muted">Last Followed user : <span
+                          id="lastFollowUser"></span>
+                  </small>
+
+                  <small style="opacity: 0" id="dummy" class="form-text text-muted">Dummy <span
+                          id="dummySpan"></span></small>
+
+              </div>
+
+<div class="panelBtn">
+
+    <button id="singleFollowBtn" class="btn btn-sm btn-primary" disabled>Follow Single</button>
+    <button id="userFollowBtn" class="btn btn-sm btn-primary">Follow All</button>
+    <button id="allUserFollowStopBtn" class="btn btn-sm btn-primary">Stop</button>
+
+</div>
+                    <div id="loadingFollow" class="loading"></div>
+            </div>
+        </div>
+        <div id="tab3" class="tab-content">
+            <div class=" col form-group">
+                <label for="userShare">Sharing Users Items</label>
+                <input type="text" class="form-control" id="userShareInput" aria-describedby="userFollowInput"
+                       placeholder="Enter user name" required disabled>
+
+               <div class="small">
+
+                   <small id="sharedHelp" class="form-text text-muted">Number of users : <span id="userShare"></span>
+                   </small>
+                   <small id="sharedUserHelp" class="form-text text-muted">Last shared user : <span id="shareduser"></span>
+                   </small>
+                   <small id="lastSharedHelp" class="form-text text-muted">Last shared item : <span id="lastShared"></span>
+                   </small>
+
+               </div>
+
+<div class="panelBtn">
+
+    <button id="userShareBtn" class="btn btn-sm btn-primary">Share All</button>
+    <button id="allUserShareStopBtn" class="btn btn-sm btn-primary">Stop</button>
+
+</div>
+                      <div id="loadingShare" class=""></div>
+            </div>
+        </div>
+        <div id="tab4" class="tab-content">
+            <div class=" col form-group">
+                <label for="userLikeCount">Like Users Items</label>
+                <input type="text" class="form-control" id="userLikeInput" aria-describedby="userLikeCount"
+                       placeholder="Enter user name" required disabled>
+
+               <div class="small">
+                   <small id="likeHelp" class="form-text text-muted">Number of users : <span id="userLikeCount"></span>
+                   </small>
+
+                   <small id="likeUserHelp" class="form-text text-muted">Last liked user : <span id="likedUser"></span>
+                   </small>
+                   <small id="lastLikedHelp" class="form-text text-muted">Last liked item : <span id="lastLike"></span>
+                   </small>
+
+
+               </div>
+
+<div class="panelBtn">
+
+
+    <button id="allUserLikeBtn" class="btn btn-sm btn-primary">Like All</button>
+    <button id="allUserLikeStopBtn" class="btn btn-sm btn-primary">Stop</button>
+</div>
+                <div id="loadingLike" class=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
     <div class="row">
         <div class=" col form-group">
-            <label for="userSearchInput">Enter User name to search</label>
-            <input type="text" class="form-control" id="userSearchInput" aria-describedby="usersSearch"
-                   placeholder="Enter user name" required>
-            <small id="userHelp" class="form-text text-muted">Number of users : <span id="userCount"></span></small>
-            <button id="usersSearchBtn" class="btn btn-sm btn-primary">Search</button>
-            <button id="usersSearchStopBtn" class="btn btn-sm btn-primary">Stop</button>
-            <div id="loading" class=""></div>
+            <button id="slideBtn" class="slide-down btn btn-block btn-primary">Console</button>
+            <div id="textContainer" class="textContainer">
+                <div id="div1" class="scrollDivContainer1">
+                    <div id="div2" class="scrollDivContainer2">
+                        <div id="div3" class="scrollDivContainer3"></div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
-
-        <div class=" col form-group">
-            <label for="userFollowInput">Enter User name to follow</label>
-            <input type="text" class="form-control" id="userFollowInput" aria-describedby="userFollowInput"
-                   placeholder="Enter user name" required disabled>
-            <small id="dbHelp" class="form-text text-muted">Number of users : <span id="followingUserCount"></span>
-            </small>
-           <!-- <button id="singleFollowBtn" class="btn btn-sm btn-primary">Follow Single</button> -->
-            <button id="userFollowBtn" class="btn btn-sm btn-primary">Follow All</button>
-            <button id="allUserFollowStopBtn" class="btn btn-sm btn-primary">Stop</button>
-
-        </div>
-
-        <div class="w-100"></div>
-
-        <div class=" col form-group">
-            <label for="userShare">Sharing Users Items</label>
-            <input type="text" class="form-control" id="userShareInput" aria-describedby="userFollowInput"
-                   placeholder="Enter user name" required>
-            <small id="sharedHelp" class="form-text text-muted">Number of users : <span id="userShare"></span></small>
-            <button id="userShareBtn" class="btn btn-sm btn-primary">Share All</button>
-            <button id="allUserShareStopBtn" class="btn btn-sm btn-primary">Stop</button>
-
-        </div>
-
-        <div class=" col form-group">
-           UNDER CONSTRUCIOTN
-
-        </div>
     </div>
 
 

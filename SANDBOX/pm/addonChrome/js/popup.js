@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+    $('#textContainer').toggle();
+
     var userSearchInputValue = null;
     var userFollowInputValue = null;
 
@@ -9,75 +12,139 @@ $(document).ready(function () {
         }
     );
 
+    $("#usersSearchContinueBtn").click(function () {
+        userOperation('continueUserSearch');
+    });
+
+
     $("#usersSearchBtn").click(function () {
-        userSearch(userSearchInputValue);
+
+        userOperation('userSearch',userSearchInputValue);
         $("#loading").addClass('loading');
 
     });
 
+
     $("#usersSearchStopBtn").click(function () {
-        stop('stopSearch');
+        userOperation('stopSearch');
         $("#loading").removeClass('loading');
     });
 
-    $("#allUserFollowStopBtn").click(function () {
-        stop('stopFollow');
-    });
 
     $("#userShareBtn").click(function () {
-       shareItems();
+        userOperation('shareItem');
+        $("#loadingShare").addClass('loading');
     });
 
+    $("#allUserShareStopBtn").click(function () {
+        userOperation('stopShare');
+        $("#loadingShare").removeClass('loading');
+    });
 
-    $("#userFollowInput").on('change',
+    $("#allUserFollowStopBtn").click(function () {
+        userOperation('stopFollow');
+        $("#loadingFollow").removeClass('loading');
+    })
+
+    $("#allUserLikeStopBtn").click(function () {
+        userOperation('stopLike');
+        $("#loadingLike").removeClass('loading');
+    })
+
+
+    $("#userFollowInput").on('input',
         function () {
-            userFollowInputValue = $(this).val();
-          //  console.log(userFollowInputValue);
+        if($(this).val()===''){
+            $('#singleFollowBtn').attr('disabled',true);
         }
-    );
-
-    $("#singleFollowBtn").on('click',
-        function () {
-            userFollow('single');
+        
+            //userFollowInputValue = $(this).val();
+            //  console.log(userFollowInputValue);
         }
     );
 
 
     $("#userFollowBtn").click(function () {
-        userFollow(userFollowInputValue);
+
+        userOperation('userFollow');
+        $("#loadingFollow").addClass('loading');
+    });
     });
 
+
+   $("#userFollowInput").on('click',
+        function () {
+
+            $.post('http://localhost/addonChrome/php/getToShare.php', {shared: 'share'}, function (userId) {
+                $("#userFollowInput").val(userId);
+
+                $('#singleFollowBtn').attr('disabled', false);
+            });
+        }
+    );
+
+ $('#singleFollowBtn').click(function () {
+     var id = $("#userFollowInput").val();
+    userOperation('singleFollow',id);
 });
 
 
-function userSearch(InputValue) {
+$("#allUserLikeBtn").click(function () {
+    userLike();
+});
+
+function userOperation(message,inputEntry,bool){
     chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
         let activeTab = tabs[0];
-        chrome.tabs.sendMessage(activeTab.id, {message: "userSearch", userName: InputValue});
+        chrome.tabs.sendMessage(activeTab.id, {message: message, userName:inputEntry,userFollowSingleBool:bool});
 
     });
 }
 
-function userFollow(InputValue) {
+
+function userLike() {
     chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
         let activeTab = tabs[0];
-        chrome.tabs.sendMessage(activeTab.id, {message: "userFollow", userNameFollow: InputValue});
+        chrome.tabs.sendMessage(activeTab.id, {message: "userLike"});
 
     });
 }
 
-function stop(stopType) {
-    chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
-        let activeTab = tabs[0];
-        chrome.tabs.sendMessage(activeTab.id, {message: "stop", stop: stopType});
-
+function getCount(message,outputElement,) {
+    $.post('http://localhost/addonChrome/php/userCount.php',{message:message},function (data) {
+        $("#"+ outputElement +"").text(data);
     });
 }
 
-function shareItems() {
-    chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
-        let activeTab = tabs[0];
-        chrome.tabs.sendMessage(activeTab.id, {message: "shareItem"});
+chrome.runtime.onMessage.addListener(
+    function (request, sender, sendResponse) {
+        $("#div3").append('<p>'+request.textArea+'</p>');
+        scrollToBottom();
 
     });
+
+let userCountInterva = setInterval(function () {
+
+    getCount('userCount','userCount');
+    getCount('followCount','followingUserCount');
+    getCount('sharingCount','userShare');
+    getCount('likeCount','userLikeCount');
+    getCount('lastuser','lastUser');
+    getCount('lastSearch','lastSearch');
+    getCount('lastFollow','lastFollowUser');
+    getCount('lastShare','shareduser');
+    getCount('lastLike','likedUser');
+
+},1000);
+
+function scrollToBottom(element) {
+    $('#div2').scrollTop($('#div2')[0].scrollHeight);
 }
+
+$("#slideBtn").click(function () {
+
+    $('#textContainer').slideToggle(2,function (status) {
+
+    });
+});
+
