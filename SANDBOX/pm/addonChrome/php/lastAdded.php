@@ -6,6 +6,7 @@ if(isset($_POST)){
     $userId = $_POST['userid'];
     $search_input = $_POST['search_input'];
     $max_id = $_POST['max_id'];
+    $lastItem = $_POST['last_item'];
 
     if($_POST['type'] === 'lastRec'){
         $sql = "UPDATE `last_added` SET search_input = '$search_input', last_added_user = '$userId', max_id = $max_id WHERE last_rec = 'y'";
@@ -17,11 +18,11 @@ if(isset($_POST)){
 
 
     if($_POST['type'] === 'lastShare'){
-        $sql = "UPDATE `last_added` SET search_input = '$search_input', last_added_user = '$userId', max_id = $max_id WHERE last_share = 'y'";
+        $sql = "UPDATE `last_added` SET search_input = '$search_input', last_added_user = '$userId', max_id = '$max_id' WHERE last_share = 'y'";
     }
 
     if($_POST['type'] === 'lastLike'){
-        $sql = "UPDATE `last_added` SET search_input = '$search_input', last_added_user = '$userId', max_id = $max_id WHERE last_like = 'y'";
+        $sql = "UPDATE `last_added` SET search_input = '$search_input', last_added_user = '$userId', max_id = '$max_id' , last_item = '$lastItem' WHERE last_like = 'y'";
     }
 
 

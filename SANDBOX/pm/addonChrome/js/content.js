@@ -57,15 +57,18 @@ chrome.runtime.onMessage.addListener(
                 message(m_id);
                 m_id++;
 
-            }, 2000);
+            }, 300);
 
         }
 
         if (request.message === 'singleFollow') {
             try {
+
                 $.post('/user/' + request.userName + '/follow_user', function (data) {
-                    lastUser(request.userName, '', '', 'lastFollow');
+
                 });
+
+                lastUser(request.userName, '', '', '' , 'lastFollow');
             } catch (e) {
                 message(e);
             }
@@ -77,8 +80,9 @@ chrome.runtime.onMessage.addListener(
         if (request.message === 'userFollow') {
             clearInterval(followInterval);
             followInterval = setInterval(function () {
+
                 followUser();
-            }, 2000);
+            }, 400);
         }
         if (request.message === "userLike") {
             likeItem();
@@ -92,6 +96,8 @@ chrome.runtime.onMessage.addListener(
 
 
 function continueUserSearch(clearInt) {
+
+    clearInterval(continue_search_interval);
 
     var dbResponse = [];
     var max_id_;
@@ -119,7 +125,10 @@ function continueUserSearch(clearInt) {
             })
             .done(function (data) {
                 if (data.html === "") {
+                    message('','nomorerecrds');
                     message("No more records found");
+
+                    clearInterval(continue_search_interval);
                     clearInterval(search_interval);
                 } else {
                     var parsed = $.parseHTML(data.html);
@@ -138,7 +147,7 @@ function continueUserSearch(clearInt) {
                         var lastElement = index === parsed.length - 1;
 
                         if (lastElement) {
-                            lastUser(userid, query, max_id_, 'lastRec');
+                            lastUser(userid, query, max_id_, '' ,'lastRec');
                             message('Last added user ' + userid);
                         }
 
@@ -147,10 +156,10 @@ function continueUserSearch(clearInt) {
                 }
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
-                message('Server not responding...' + jqXHR);
+                message('Server not responding...' + jqXHR.status);
             });
         max_id_++;
-    }, 2000);
+    }, 400);
 
 
 }
@@ -166,6 +175,7 @@ function startUserSearch(userName, max_id, clearInt) {
         })
         .done(function (data) {
             if (data.html === "") {
+                message('','nomorerecrds');
                 message("No more records found");
                 clearInterval(clearInt);
             } else {
@@ -186,7 +196,7 @@ function startUserSearch(userName, max_id, clearInt) {
                     var lastElement = index === parsed.length - 1;
 
                     if (lastElement) {
-                        lastUser(userid, userName, max_id, 'lastRec');
+                        lastUser(userid, userName, max_id, '', 'lastRec');
                         message('Last added user' + userid);
                     }
 
@@ -200,7 +210,7 @@ function startUserSearch(userName, max_id, clearInt) {
 }
 
 
-function lastUser(userid, search_input, max_id, type) {
+function lastUser(userid, search_input, max_id, last_item , type) {
     $.ajax(
         {
             url: 'http://localhost/addonChrome/php/lastAdded.php',
@@ -209,7 +219,8 @@ function lastUser(userid, search_input, max_id, type) {
                 "userid": userid,
                 "search_input": search_input,
                 "max_id": max_id,
-                "type": type
+                "type": type,
+                "last_item":last_item
             },
             beforeSend: function () {
                 // do something
@@ -262,16 +273,30 @@ function followUser() {
         })
         .done(function (data) {
             try {
-                message('Followed user ' + data);
+
                 $.post('/user/' + data + '/follow_user', function () {
-                    lastUser(data, '', '', 'lastFollow');
+
+                    $.post('http://localhost/addonChrome/php/followUser.php',{followed:data} , function () {
+                        lastUser(data, '', '', '', 'lastFollow');
+                        message('Followed user ' + data);
+                    })
+
+                }).fail(function (jqXHR, ajaxOptions, thrownError) {
+                    if (jqXHR.status === 403){
+                        message('Server Error ' + jqXHR.status + ' most likely Captcha');
+                        message('','captcha');
+                        clearInterval(followInterval);
+
+                    }
+
                 });
             } catch (e) {
                 message(e);
             }
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-            message('Server not responding...' + jqXHR);
+
+            message('Server not responding...' + jqXHR.status);
         });
 }
 
@@ -309,8 +334,6 @@ function sm() {
                         $.post("/closet/" + userId + "?sort_by=added_desc&just_in_closet=true&max_id=" + max_id + "", function (data) {
 
 
-
-
                             var parsed = $.parseHTML(data.html);
 
                             $.each(parsed, function () {
@@ -331,7 +354,7 @@ function sm() {
 
                             if (i > 1) {
 
-                                lastUser(userid, '', max_id, 'lastSahre');
+                                lastUser(userId, '', max_id, 'lastSahre');
 
                                 $.post('http://localhost/addonChrome/php/shared.php', {
                                     shared: 'Y',
@@ -365,6 +388,12 @@ function sm() {
 
                                                 message('Share increment   ' + share + ' shared element ID ' + elements[share]);
 
+                                            }).fail(function (jqXHR, ajaxOptions, thrownError) {
+                                                if(jqXHR.status === 403){
+                                                    message('','captcha')
+                                                    message('Server not responding...' + jqXHR.status + ' maybe captcha');
+                                                }
+
                                             });
                                             share++;
                                         }
@@ -373,7 +402,7 @@ function sm() {
                                     }
 
 
-                                }, 2000);
+                                }, 800);
 
                                 $.post('http://localhost/addonChrome/php/shared.php', {
                                     shared: 'Y',
@@ -450,7 +479,7 @@ function likeItem() {
                                 likeIncrement++;
                             });
                             if (likeElements[0] === 'undifined') {
-                                message('like element is undifined ');
+                               // message('like element is undifined ');
                                 likeInternalInterval = false;
                                 like_max_id_interval_bool = false;
                                 like_max_id = 1;
@@ -461,19 +490,18 @@ function likeItem() {
                             if (likeIncrement > 1) {
 
 
-
-
                                 message('like element length ' + likeElements.length);
 
                                 $.post('http://localhost/addonChrome/php/liked.php', {
                                     like: 'Y',
                                     userid: likeUserId
+
                                 }, function (dbResponse) {
                                     message(dbResponse);
                                     message('user marked as liked ' + likeUserId);
                                 });
 
-                                lastUser(likeUserId, '', like_max_id, 'lastLike');
+
 
                                 likeInternalInterval = true;
 
@@ -488,11 +516,26 @@ function likeItem() {
                                             likeInternalInterval = false;
                                             mainLikeIn = false;
                                             like_max_id_interval_bool = true;
+
+
                                             message('liked all items in this max_id');
                                         } else {
+                                            lastUser(likeUserId, '', like_max_id, likeElements[like],'lastLike');
+
 
                                             $.post(' /listing/' + likeElements[like] + '/like', function (likeData) {
-                                                message('Like increment   ' + likeData.html + 'Liked element ID ' + likeElements[like]);
+
+                                                $.post('http://localhost/addonChrome/php/items.php',{
+                                                    userid:likeUserId,
+                                                    item_id:likeElements[like] ,
+                                                    item_max_id:like_max_id
+
+                                                },function (data) {
+
+                                                   message(data);
+                                                });
+
+                                                message('Like increment ' + likeData.html + ' Liked element ID ' + likeElements[like]);
                                             });
 
                                             like++;
@@ -500,7 +543,7 @@ function likeItem() {
                                     } else {
                                         // stop internal like interval
                                     }
-                                }, 2000);
+                                }, 500);
 
                             } else {
                                 $.post('http://localhost/addonChrome/php/nolisting.php', {
@@ -525,7 +568,7 @@ function likeItem() {
                         // stop max id interval
                     }
 
-                }, 2000);
+                }, 500);
             });
 
 
@@ -533,7 +576,7 @@ function likeItem() {
             // if main like false do nothing
         }
 
-    }, 2000);
+    }, 500);
 }
 
 /*
@@ -542,9 +585,9 @@ function stepDebug(todisplay){
 
 }*/ // debugger
 
-function message(error) {
+function message(error,captcha) {
 
-    chrome.runtime.sendMessage({textArea: error}, function () {
+    chrome.runtime.sendMessage({textArea: error,captcha:captcha}, function () {
 
     });
 

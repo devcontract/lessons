@@ -1,14 +1,28 @@
 $(document).ready(function () {
 
+
+
+
+
+    localStorage.setItem('tab', 'like');
+
+
+
+    $('li').click(function () {
+        var tabName = $(this).text();
+        localStorage.setItem('tab', tabName);
+    });
+
+
     $('#textContainer').toggle();
 
     var userSearchInputValue = null;
-    var userFollowInputValue = null;
+
 
     $("#userSearchInput").on('change',
         function () {
             userSearchInputValue = $(this).val();
-           // console.log(userSearchInputValue);
+            // console.log(userSearchInputValue);
         }
     );
 
@@ -19,7 +33,7 @@ $(document).ready(function () {
 
     $("#usersSearchBtn").click(function () {
 
-        userOperation('userSearch',userSearchInputValue);
+        userOperation('userSearch', userSearchInputValue);
         $("#loading").addClass('loading');
 
     });
@@ -42,6 +56,7 @@ $(document).ready(function () {
     });
 
     $("#allUserFollowStopBtn").click(function () {
+        clearInterval(x);
         userOperation('stopFollow');
         $("#loadingFollow").removeClass('loading');
     })
@@ -54,10 +69,10 @@ $(document).ready(function () {
 
     $("#userFollowInput").on('input',
         function () {
-        if($(this).val()===''){
-            $('#singleFollowBtn').attr('disabled',true);
-        }
-        
+            if ($(this).val() === '') {
+                $('#singleFollowBtn').attr('disabled', true);
+            }
+
             //userFollowInputValue = $(this).val();
             //  console.log(userFollowInputValue);
         }
@@ -66,26 +81,29 @@ $(document).ready(function () {
 
     $("#userFollowBtn").click(function () {
 
+
         userOperation('userFollow');
+        $('#userFollowInput').val('');
         $("#loadingFollow").addClass('loading');
     });
-    });
 
 
-   $("#userFollowInput").on('click',
-        function () {
 
-            $.post('http://localhost/addonChrome/php/getToShare.php', {shared: 'share'}, function (userId) {
-                $("#userFollowInput").val(userId);
+$("#userFollowInput").on('click',
+    function () {
 
-                $('#singleFollowBtn').attr('disabled', false);
-            });
-        }
-    );
+        $.post('http://localhost/addonChrome/php/getToShare.php', {shared: 'share'}, function (userId) {
+            $("#userFollowInput").val(userId);
 
- $('#singleFollowBtn').click(function () {
-     var id = $("#userFollowInput").val();
-    userOperation('singleFollow',id);
+            $('#singleFollowBtn').attr('disabled', false);
+        });
+    }
+);
+
+$('#singleFollowBtn').click(function () {
+    var id = $("#userFollowInput").val();
+
+    userOperation('singleFollow', id, '');
 });
 
 
@@ -93,49 +111,109 @@ $("#allUserLikeBtn").click(function () {
     userLike();
 });
 
-function userOperation(message,inputEntry,bool){
-    chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
+function userOperation(message, inputEntry, bool) {
+    chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
         let activeTab = tabs[0];
-        chrome.tabs.sendMessage(activeTab.id, {message: message, userName:inputEntry,userFollowSingleBool:bool});
+        chrome.tabs.sendMessage(activeTab.id, {message: message, userName: inputEntry, userFollowSingleBool: bool});
 
     });
 }
 
 
 function userLike() {
-    chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
+    chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
         let activeTab = tabs[0];
         chrome.tabs.sendMessage(activeTab.id, {message: "userLike"});
 
     });
 }
 
-function getCount(message,outputElement,) {
-    $.post('http://localhost/addonChrome/php/userCount.php',{message:message},function (data) {
-        $("#"+ outputElement +"").text(data);
-    });
-}
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        $("#div3").append('<p>'+request.textArea+'</p>');
+        if (request.messageType === 'check') {
+            $('#lastFollowNameOutput').text(request.textArea);
+
+        }
+
+        if (request.captcha === 'nomorerecrds') {
+
+            var myAudio = new Audio(chrome.runtime.getURL("/mp3/note.mp3"));
+            myAudio.play();
+
+        }
+
+        if (request.captcha === 'captcha') {
+
+            var myAudio = new Audio(chrome.runtime.getURL("/mp3/note.mp3"));
+                myAudio.play();
+
+        }
+
+
+        $("#div3").append('<p>' + request.textArea + '</p>');
         scrollToBottom();
 
     });
 
+function timer() {
+
+    var p = JSON.parse(window.countData);
+
+    var timeLeft = (((parseInt(p['TOTAL_COUNTS'])) - parseInt(p['FOLLOWED_COUNTS'])) * 0.4 ) ;
+
+    var d = new Date(2019,0,0,0,0,0,0);
+
+    var minutes = timeLeft / 60;
+
+    d.setMinutes(minutes);
+
+    document.getElementById("timer").innerHTML =  d.getHours() + ' '+ d.getMinutes() + ' ' + d.getSeconds();
+}
+
+
+function getCount(message, lastadded ,username) {
+    $.post('http://localhost/addonChrome/php/userCount.php', {message1: message, message2:lastadded,  username: username}, function (data) {
+
+
+        window.countData = data;
+
+
+        var parsed = JSON.parse(data);
+
+
+        $(".userCount").text(parsed['TOTAL_COUNTS']);
+        $("#followingUserCount").text(parsed['FOLLOWED_COUNTS']);
+        $("#userShare").text(parsed['LIKED_COUNTS']);
+        $("#userLikeCount").text(parsed['SHARED_COUNTS']);
+        $(".nolisting").text(parsed['NOLISTING_COUNTS']);
+
+
+        $("#lastUser").text(parsed['LAST_ADDED_USERID']);
+        $("#lastFollowUser").text(parsed['LAST_FOLLOW_USERID']);
+        $("#sharedUser").text(parsed['LAST_SHARE_USER']);
+        $("#likedUser").text(parsed['LAST_LIKE_USERID']);
+        $(".lastItem").text(parsed['LAST_LIKE_ITEM']);
+        $("#lastSearch").text(parsed['LAST_SEARCH_USERNAME']);
+
+       timer();
+
+    });
+}
+
 let userCountInterva = setInterval(function () {
+/*
 
-    getCount('userCount','userCount');
-    getCount('followCount','followingUserCount');
-    getCount('sharingCount','userShare');
-    getCount('likeCount','userLikeCount');
-    getCount('lastuser','lastUser');
-    getCount('lastSearch','lastSearch');
-    getCount('lastFollow','lastFollowUser');
-    getCount('lastShare','shareduser');
-    getCount('lastLike','likedUser');
+    getCount('lastSearch', '#lastSearch');
 
-},1000);
+    getCount('userName', '#lastFollowNameOutput', $('#lastFollowUser').text());
+   */
+    getCount('allCount','');
+
+
+
+
+}, 500);
 
 function scrollToBottom(element) {
     $('#div2').scrollTop($('#div2')[0].scrollHeight);
@@ -143,8 +221,13 @@ function scrollToBottom(element) {
 
 $("#slideBtn").click(function () {
 
-    $('#textContainer').slideToggle(2,function (status) {
+
+    $('#textContainer').slideToggle(2, function (status) {
 
     });
 });
 
+
+
+
+});

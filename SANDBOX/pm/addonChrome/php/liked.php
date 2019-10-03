@@ -10,7 +10,7 @@ if(isset($_POST['like'])){
 
     if (mysqli_query($connection, $sql)) {
         //  echo "New record created successfully";
-        echo $userId . "is marked as shared ";
+        echo $userId . "is marked as liked ";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($connection);
     }

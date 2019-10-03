@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="css/master.css">
     <script src="js/jquery341.js"></script>
 
+    <script src="js/popup.js" defer></script>
+    <script type="text/javascript" src="js/pieChart/googlePieChart.js" defer></script>
+    <script type="text/javascript" src="js/pieChart/pieFunction.js" defer></script>
+   <!-- <script src="js/timer/timer.js" defer></script>-->
+
+
     <title></title>
 </head>
 <body>
@@ -20,10 +26,18 @@
 
     <div>
         <ul id="menu" class="navbar navbar-expand-lg navbar-light bg-light">
-            <a href="#tab1"><li>Search</li></a>
-            <a href="#tab2"><li>Follow</li></a>
-            <a href="#tab3"><li>Share</li></a>
-            <a href="#tab4"><li>Like</li></a>
+            <a href="#tab1">
+                <li>Search</li>
+            </a>
+            <a href="#tab2">
+                <li>Follow</li>
+            </a>
+            <a href="#tab3">
+                <li>Share</li>
+            </a>
+            <a href="#tab4">
+                <li>Like</li>
+            </a>
         </ul>
     </div>
 
@@ -35,107 +49,201 @@
                 <input type="text" class="form-control" id="userSearchInput" aria-describedby="usersSearch"
                        placeholder="Enter user name" required>
 
-            <div class="small">
-                <small id="userHelp" class="form-text text-muted">Number of users : <span id="userCount"></span></small>
-                <small id="lastUserHelp" class="form-text text-muted">Last recorded user : <span id="lastUser"></span>
-                </small>
-                <small id="lastSearchHelp" class="form-text text-muted">Last searched word : <span
-                        id="lastSearch"></span>
-                </small>
+                <div class="small">
+
+                    <small id="userHelp" class="form-text text-muted">Number of users : <span class="userCount"></span>
+                    </small>
+                    <small id="lastUserHelp" class="form-text text-muted">Last recorded user : <span
+                            id="lastUser"></span>
+                    </small>
+                    <small id="lastSearchHelp" class="form-text text-muted">Last searched word : <span
+                            id="lastSearch"></span>
+                    </small>
+
+                </div>
+                <div class="panelBtn">
+
+                    <button id="usersSearchContinueBtn" class=" btn btn-sm btn-primary">Continue</button>
+                    <button id="usersSearchBtn" class=" btn btn-sm btn-primary">Search</button>
+                    <button id="usersSearchStopBtn" class=" btn btn-sm btn-primary">Stop</button>
+
+                </div>
+                <div id="loading" class=""></div>
 
             </div>
-<div class="panelBtn">
-
-    <button id="usersSearchContinueBtn" class=" btn btn-sm btn-primary">Continue</button>
-    <button id="usersSearchBtn" class=" btn btn-sm btn-primary">Search</button>
-    <button id="usersSearchStopBtn" class=" btn btn-sm btn-primary">Stop</button>
-
-</div>                <div id="loading" class=""></div>
-
-            </div>
-
         </div>
+
+
         <div id="tab2" class="tab-content">
-            <div class=" col form-group">
-                <label for="userFollowInput">Enter User Id to follow</label>
+            <div class="col form-group">
+                <label for="userShare">Followed users </label>
+
+                <div class="progress-bar-cont">
+
+
+                    <div class="progress mx-auto" data-value='100'><span class="progress-left">
+                        <span class="progress-bar border-primary"></span></span>
+                        <span class="progress-right">
+                        <span class="progress-bar border-primary"></span></span>
+
+
+                        <div class="counts progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <label for="labelTot"></label>
+                            <div id="labelTot" class="top text-center font-weight-bold">Total : <br><span
+                                    class="userCount"></span>
+                                <div class="small"></div>
+                            </div>
+
+                            <div id="timer"></div>
+
+                            <label for="labelFoll"> </label>
+                            <div id="labelFoll" class="bottom text-center font-weight-bold">Following : <br><span
+                                    id="followingUserCount"></span>
+                                <div class="small"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <input type="text" class="form-control" id="userFollowInput" aria-describedby="userFollowInput"
                        placeholder="Enter user Id or click here" required>
-
-              <div class="small">
-
-                  <small id="dbHelp" class="form-text text-muted">Number of users : <span id="followingUserCount"></span>
-                  </small>
+<div class="small">
 
 
-                  <small id="lastUserFollowHelp" class="form-text text-muted">Last Followed user : <span
-                          id="lastFollowUser"></span>
-                  </small>
 
-                  <small style="opacity: 0" id="dummy" class="form-text text-muted">Dummy <span
-                          id="dummySpan"></span></small>
+                <small id="lastUserFollowHelp" class="form-text text-muted">Last Followed user : <span
+                        id="lastFollowUser"></span>
+                </small>
 
-              </div>
-
-<div class="panelBtn">
-
-    <button id="singleFollowBtn" class="btn btn-sm btn-primary" disabled>Follow Single</button>
-    <button id="userFollowBtn" class="btn btn-sm btn-primary">Follow All</button>
-    <button id="allUserFollowStopBtn" class="btn btn-sm btn-primary">Stop</button>
-
+                <small style="" id="lastFollowName" class="form-text text-muted">Last Followed User name : <span
+                        id="lastFollowNameOutput"></span></small>
+                <small  class="form-text text-muted">No listing users: <span class="nolisting"></span>
+                </small>
 </div>
-                    <div id="loadingFollow" class=""></div>
+                <div class="panelBtn">
+
+                    <button id="singleFollowBtn" class="btn btn-sm btn-primary" disabled>Follow Single</button>
+                    <button id="userFollowBtn" class="btn btn-sm btn-primary">Follow All</button>
+                    <button id="allUserFollowStopBtn" class="btn btn-sm btn-primary">Stop</button>
+
+                </div>
+                <div id="loadingFollow" class=""></div>
             </div>
         </div>
+
+
         <div id="tab3" class="tab-content">
             <div class=" col form-group">
-                <label for="userShare">Sharing Users Items</label>
+
+                <label for="userShare">Shared Users Items</label>
+
+                <div class="progress-bar-cont">
+
+
+                    <div class="progress mx-auto" data-value='100'><span class="progress-left">
+                        <span class="progress-bar border-primary"></span></span>
+                        <span class="progress-right">
+                        <span class="progress-bar border-primary"></span></span>
+
+
+                        <div class="counts progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <label for="labelTot"></label>
+                            <div class="top text-center font-weight-bold">Total : <br><span
+                                    class="userCount"></span>
+                                <div class="small"></div>
+                            </div>
+
+                            <label for="labelFoll"> </label>
+                            <div id="labelShare" class="bottom text-center font-weight-bold">Shared : <br><span
+                                    id="userShare"></span>
+                                <div class="small"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <input type="text" class="form-control" id="userShareInput" aria-describedby="userFollowInput"
                        placeholder="Enter user name" required disabled>
 
-               <div class="small">
+                <div class="small">
 
-                   <small id="sharedHelp" class="form-text text-muted">Number of users : <span id="userShare"></span>
-                   </small>
-                   <small id="sharedUserHelp" class="form-text text-muted">Last shared user : <span id="shareduser"></span>
-                   </small>
-                   <small id="lastSharedHelp" class="form-text text-muted">Last shared item : <span id="lastShared"></span>
-                   </small>
+                    <small id="sharedUserHelp" class="form-text text-muted">Last shared user : <span
+                            id="sharedUser"></span>
+                    </small>
+                    <small id="lastSharedHelp" class="form-text text-muted">Last shared item : <span
+                            id="lastShared"></span>
+                    </small>
 
-               </div>
+                    <small id="" class="form-text text-muted">No listing users: <span class="nolisting"></span>
+                    </small>
 
-<div class="panelBtn">
+                </div>
 
-    <button id="userShareBtn" class="btn btn-sm btn-primary">Share All</button>
-    <button id="allUserShareStopBtn" class="btn btn-sm btn-primary">Stop</button>
+                <div class="panelBtn">
 
-</div>
-                      <div id="loadingShare" class=""></div>
+                    <button id="userShareBtn" class="btn btn-sm btn-primary">Share All</button>
+                    <button id="allUserShareStopBtn" class="btn btn-sm btn-primary">Stop</button>
+
+                </div>
+                <div id="loadingShare" class=""></div>
             </div>
         </div>
         <div id="tab4" class="tab-content">
             <div class=" col form-group">
+
                 <label for="userLikeCount">Like Users Items</label>
+
+                <div class="progress-bar-cont">
+
+
+
+                    <div class="progress mx-auto" data-value='100'><span class="progress-left">
+                        <span class="progress-bar border-primary"></span></span>
+                        <span class="progress-right">
+                        <span class="progress-bar border-primary"></span></span>
+
+
+                        <div class="counts progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <label for="labelTot"></label>
+                            <div id="label" class="top text-center font-weight-bold">Total : <br><span
+                                    class="userCount"></span>
+                                <div class="small"></div>
+                            </div>
+
+                            <label for="labelFoll"> </label>
+                            <div id="labelLike" class="bottom text-center font-weight-bold">Liked : <br><span
+                                    id="userLikeCount"></span>
+                                <div class="small"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <input type="text" class="form-control" id="userLikeInput" aria-describedby="userLikeCount"
                        placeholder="Enter user name" required disabled>
 
-               <div class="small">
-                   <small id="likeHelp" class="form-text text-muted">Number of users : <span id="userLikeCount"></span>
-                   </small>
-
-                   <small id="likeUserHelp" class="form-text text-muted">Last liked user : <span id="likedUser"></span>
-                   </small>
-                   <small id="lastLikedHelp" class="form-text text-muted">Last liked item : <span id="lastLike"></span>
-                   </small>
+                <div class="small">
 
 
-               </div>
+                    <small id="likeUserHelp" class="form-text text-muted">Last liked user : <span id="likedUser"></span>
+                    </small>
+                    <small id="lastLikedHelp" class="form-text text-muted">Last liked item : <span class="lastItem" id="lastLike"></span>
+                    </small>
+                    <small id="noListing" class="form-text text-muted">No listing users: <span class="nolisting"></span>
+                    </small>
 
-<div class="panelBtn">
+
+                </div>
+
+                <div class="panelBtn">
 
 
-    <button id="allUserLikeBtn" class="btn btn-sm btn-primary">Like All</button>
-    <button id="allUserLikeStopBtn" class="btn btn-sm btn-primary">Stop</button>
-</div>
+                    <button id="allUserLikeBtn" class="btn btn-sm btn-primary">Like All</button>
+                    <button id="allUserLikeStopBtn" class="btn btn-sm btn-primary">Stop</button>
+                </div>
                 <div id="loadingLike" class=""></div>
             </div>
         </div>
@@ -160,6 +268,6 @@
 
 
 </div>
-<script src="js/popup.js"></script>
+
 </body>
 </html>

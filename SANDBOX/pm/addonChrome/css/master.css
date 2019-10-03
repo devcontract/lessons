@@ -13,8 +13,8 @@ body {
 
 .loading {
     position:absolute;
-    left:15px;
-    top:0px;
+    left:325px;
+    top:300px;
     width: 11px;
     height:11px;
     border-radius: 20px;
@@ -140,17 +140,15 @@ li{
     padding:1px;
     width:70px;
     text-align:center;
-    box-shadow: 0px -1px 0px #a5d0fd;
+
     border-radius:5px;
+    background-color: #61adff1f
 }
 li:hover{
 
     background-image: linear-gradient(to bottom , #047afb9e, white);
-    transition:0.5s;
 
-}
-a:hover{
-    color:white !important;
+    color:white;
 
 }
 
@@ -198,3 +196,102 @@ label{
 
 
 }
+
+/*progress bar*/
+
+.progress {
+
+    width: 150px;
+    height: 150px;
+    background: none;
+    position: relative;
+}
+
+.progress::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 6px solid #eee;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.progress>span {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+
+}
+
+.progress .progress-left {
+    left: 0;
+}
+
+.progress .progress-bar {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border-width: 6px;
+    border-style: solid;
+    position: absolute;
+    top: 0;
+}
+
+.progress .progress-left .progress-bar {
+    left: 100%;
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+    border-left: 0;
+    -webkit-transform-origin: center left;
+    transform-origin: center left;
+}
+
+.progress .progress-right {
+    right: 0;
+}
+
+.progress .progress-right .progress-bar {
+    left: -100%;
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    border-right: 0;
+    -webkit-transform-origin: center right;
+    transform-origin: center right;
+}
+
+.top{
+    position:absolute;
+    top:20px;
+}
+.bottom{
+    position:absolute;
+    bottom:10px;
+    color:#007bff;
+}
+
+.progress-bar-cont{
+    margin:20px 0;
+}
+
+input{
+    margin:20px 0 ;
+}
+
+.progress-bar{
+    background-color:#047afb03 !important;
+
+}
+.border-primary{
+    border-top:5.6px solid #59a8fc !important;
+
+}
+
+
+
+
+

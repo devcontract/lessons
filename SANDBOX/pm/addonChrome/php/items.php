@@ -3,14 +3,14 @@
 require 'mysql.php';
 
 if(isset($_POST['userid'])){
-    $userId = $_POST['userid'];
-    $nickname = $_POST['nickname'];
-    $fullname = $_POST['fullname'];
-    $shared = $_POST['shared'];
+    $userid = $_POST['userid'];
+    $item_id = $_POST['item_id'];
+    $item_max_id = $_POST['item_max_id'];
 
-    $clean_fullname = htmlentities($fullname, ENT_QUOTES, 'UTF-8');
 
-    $sql = "INSERT INTO `poshM` (`id`, `userid`, `nickname`, `fullname`, `followed`) VALUES (NULL, '$userId', '$nickname', '$clean_fullname', 'N')";
+
+
+    $sql = "INSERT INTO `items` (`id`, `user_id`, `item_id`, `item_max_id`) VALUES (NULL, '$userid', '$item_id', '$item_max_id')";
 
     if (mysqli_query($connection, $sql)) {
       //  echo "New record created successfully";

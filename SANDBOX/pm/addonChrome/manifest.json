@@ -10,7 +10,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["js/jquery341.js","js/content.js"]
+      "js": ["js/jquery341.js","js/content.js","js/pieChart/googlePieChart.js","js/pieChart/pieFunction.js","js/timer/timer.js"]
     }
   ],
   "page_action": {
