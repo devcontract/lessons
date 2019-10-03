@@ -129,7 +129,7 @@ function continueUserSearch(clearInt) {
                     message("No more records found");
 
                     clearInterval(continue_search_interval);
-                    clearInterval(search_interval);
+
                 } else {
                     var parsed = $.parseHTML(data.html);
                     var length = parsed.length;
