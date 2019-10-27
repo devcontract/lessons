@@ -1,0 +1,111 @@
+display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+
+-webkit-transform: rotate(35deg);
+        -ms-transform: rotate(35deg);
+            transform: rotate(35deg);
+
+-webkit-transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+    -o-transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+    transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+
+-webkit-transform-origin: center center;
+        -ms-transform-origin: center center;
+            transform-origin: center center;
+
+-webkit-perspective: 1px;
+            perspective: 1px;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+
+
+-webkit-box-sizing: content-box;
+	        box-sizing: content-box;
+
+-o-text-overflow: ellipsis;
+	   text-overflow: ellipsis;
+
+-webkit-box-shadow: none;
+	        box-shadow: none;
+
+-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+
+-webkit-transition-duration: 400ms;
+	     -o-transition-duration: 400ms;
+	        transition-duration: 400ms;
+	-webkit-transition-property: width, background;
+	-o-transition-property: width, background;
+	transition-property: width, background;
+	-webkit-transition-timing-function: ease;
+	     -o-transition-timing-function: ease;
+	        transition-timing-function: ease;
+
+-o-text-overflow: clip;
+		   text-overflow: clip;
+
+-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+
+
+min-width: -webkit-fit-content;
+		min-width: -moz-fit-content;
+		min-width: fit-content;
+
+
+@-webkit-keyframes MyAnimation {
+    0% { left: 0; }
+   50% { left: 200px; }
+  100% { left: 20px; }
+}
+@keyframes MyAnimation {
+    0% { left: 0; }
+   50% { left: 200px; }
+  100% { left: 20px; }
+}
+
+
+  -webkit-animation: MyAnimation 2s; /* Chr, Saf */
+          animation: MyAnimation 2s; /* IE >9, Fx >15, Op >12.0 */
+
+
+ -webkit-filter: grayscale(50%); /* Ch 23+, Saf 6.0+, BB 10.0+ */
+          filter: grayscale(50%); /* FF 35+ */
+
+ display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+
+
+ -webkit-font-feature-settings: "liga" off, "dlig"; /* Ch 16-26, BB 10, And 18.0 */
+     -moz-font-feature-settings: "liga=0, dlig=1";   /* Fx 4-21 */
+          font-feature-settings: "liga", "dlig";     /* IE 10, Saf 4.0-6.0 */
+
+ display: -ms-grid; /* IE 10 */
+  display:     grid; /* None yet */
+
+-ms-word-break: break-all;
+      word-break: break-all;
+
+  /* Non standard for webkit */
+       word-break: break-word;
+
+  -webkit-hyphens: auto; /* Saf 5.1+ */
+     -moz-hyphens: auto; /* Fx 6.0+ */
+      -ms-hyphens: auto; /* IE 10+ */
+          hyphens: auto; /* None yet */
+
+-webkit-transform: rotate(30deg); /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+      -ms-transform: rotate(30deg); /* IE 9 */
+          transform: rotate(30deg); /* IE 10, Fx 16+, Op 12.1+ */
+
+-webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+
