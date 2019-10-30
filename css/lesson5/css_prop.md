@@ -1,4 +1,4 @@
-##1.	Animation
+## 1.	Animation
 
 Комплексный метод анимирования определенных свойств элемента.
 
@@ -20,7 +20,7 @@
 }
 
 
-##2.	Background-image-options
+## 2.	Background-image-options
 
 Новое свойства влияющие нa background images, включая 
 Background-clip, background-origin   и  background-size:
@@ -30,14 +30,14 @@ Background-clip, background-origin   и  background-size:
           background-origin: padding-box;
              background-size: cover;
 
-##3.	Box-reflection
+## 3.	Box-reflection
 
 Метод отображения отражения элемента:
 
 -webkit-box-reflect: below 5px url(mask.png); /* Ch, Saf (+iOs +BB) */
  
 
-##4.	Filter
+## 4.	Filter
 
 Метод наложения эффекта (фильтр) 
 (like blur, grayscale, brightness, contrast ,hue
@@ -48,7 +48,7 @@ Background-clip, background-origin   и  background-size:
 
 
 
-##5.	Flexbox
+## 5.	Flexbox
 
 Метод позиционирования элемента вертикально или
 Горизонтально (друг на друга):
@@ -68,7 +68,7 @@ Background-clip, background-origin   и  background-size:
 
 
 
-##6.	Font-feature-settings
+## 6.	Font-feature-settings
 
 Метод наложения продвинутых типологических свойств и особенностей  шрифта .
 
@@ -78,7 +78,7 @@ Background-clip, background-origin   и  background-size:
 
 
 
-##7.	Grids
+## 7.	Grids
 
 Метод использования концепции сетки.
 Расположения контента
@@ -90,7 +90,7 @@ Background-clip, background-origin   и  background-size:
   display:     grid; /* None yet */
 
 
-##8.	Hyphens
+## 8.	Hyphens
 
 
 Метод контроля переноса строки с добавлением “-“ :
@@ -105,7 +105,7 @@ Background-clip, background-origin   и  background-size:
              hyphens: auto; /* None yet */
 
 
-##9.	Mask
+## 9.	Mask
 
 Метод выведения части элемента на экран, используя выбраное изображение как маску.
 
@@ -115,7 +115,7 @@ Background-clip, background-origin   и  background-size:
 
 
 
-##10.	Multicolumn
+## 10.	Multicolumn
 
 Метод распределение информации на колонки :
 
@@ -139,7 +139,7 @@ Background-clip, background-origin   и  background-size:
 
 
 
-##11.	Object-fit:
+## 11.	Object-fit:
 
 Это CSS свойство определяет как <img> или <video> элемент изменит свои размеры
 По отношению к своему контейнеру.
@@ -158,7 +158,7 @@ Background-clip, background-origin   и  background-size:
 
 
 
-##12.	Transforms
+## 12.	Transforms
 
 Метод трансформации элемента (rotating, scaling, etc) 
 
@@ -171,7 +171,7 @@ Background-clip, background-origin   и  background-size:
 
 
 
-##13.	Appearance 
+## 13.	Appearance 
 
 Предоставляет ограниченный контроль над внешним видом элементов управления пользовательского интерфейса, которые обычно не могут быть стилизованы с помощью CSS.
 
