@@ -1,0 +1,22 @@
+.card{
+    margin:auto;
+    width:400px
+}
+
+.body{
+    width:75%;
+    background-color:red;
+
+}
+
+input{
+
+    width:80%;
+}
+div input[type="checkbox"] ~ div {
+    opacity:0 !important;
+}
+
+div input[type="checkbox"]:checked ~ div {
+    opacity:1 !important;
+}
