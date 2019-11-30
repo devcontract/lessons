@@ -1,0 +1,44 @@
+
+.site-info { display: none; }
+.entry-title{
+    text-align:center;
+    text-shadow:1px 1px 12px grey;
+    font-size:16px !important;
+    font-family: open-sanf;
+    letter-spacing: 10px !important;
+
+}
+
+.footer-widget-1{
+
+    width:100% !important;
+    display: flex;
+    justify-content:space-between ;
+
+}
+div section img{
+    width:243px !important;
+    height:100px !important;
+    border-radius:4px;
+}
+
+.wp-caption-text{
+    text-align:center;
+    font-family:additive;
+}
+
+.gallery-item
+{
+    padding:0px 5px;
+}
+.widget,.widget-area{
+    padding:0 0 !important;
+}
+.site-main{
+    background: #292929;
+}
+
+.site-footer{
+    margin:0;
+}
+
